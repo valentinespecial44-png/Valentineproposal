@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg,#ff758c,#ff7eb3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+}
+.card {
+  width: 320px;
+  background: rgba(0,0,0,0.25);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+input, button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 20px;
+  font-size: 15px;
+}
+button {
+  font-weight: bold;
+  cursor: pointer;
+}
+#yes {
+  background: white;
+  color: #ff4d6d;
+}
+#no {
+  background: #ff4d6d;
+  color: white;
+  position: relative;
+}
+.hidden {
+  display: none;
+}
+small {
+  font-size: 11px;
+  opacity: .8;
+}
+</style>
+</head>
+
+<body>
+
+<!-- STEP 1 -->
+<div class="card" id="step1">
+  <h2>Hey 💖</h2>
+  <input id="name1" placeholder="Your name">
+  <input id="name2" placeholder="Your crush name">
+  <button onclick="nextStep()">Continue ❤️</button>
+</div>
+
+<!-- STEP 2 -->
+<form class="card hidden" id="step2"
+      action="https://formspree.io/f/xzdapepn"
+      method="POST">
+
+  <h2 id="question"></h2>
+
+  <input type="hidden" name="Your Name" id="send1">
+  <input type="hidden" name="Valentine Name" id="send2">
+  <input type="hidden" name="Answer" value="YES">
+
+  
+
+  <button id="yes" type="submit">Yes ❤️</button>
+  <button id="no" type="button">No 💔</button>
+</form>
+
+<!-- STEP 3 -->
+<div class="card hidden" id="step3">
+  <h2>Yay! 🥰</h2>
+  <p>Valentine accepted 💞</p>
+</div>
+
+<script>
+function nextStep() {
+  const n1 = document.getElementById('name1').value.trim();
+  const n2 = document.getElementById('name2').value.trim();
+  if(!n1 || !n2) return;
+
+  document.getElementById('send1').value = n1;
+  document.getElementById('send2').value = n2;
+
+  document.getElementById('question').innerText =
+    `${n2}, will you be my Valentine? 💘`;
+
+  step1.classList.add('hidden');
+  step2.classList.remove('hidden');
+}
+
+const noBtn = document.getElementById('no');
+noBtn.addEventListener('mouseover', () => {
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 200 - 100;
+  noBtn.style.transform = `translate(${x}px,${y}px)`;
+});
+
+document.getElementById('step2').addEventListener('submit', () => {
+  step2.classList.add('hidden');
+  step3.classList.remove('hidden');
+});
+</script>
+
+</body>
+</html>
